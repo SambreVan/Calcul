@@ -15,4 +15,4 @@ COPY . .
 EXPOSE 5000
 
 # Définir la commande pour démarrer l'application
-CMD ["python", "app.py"]
+CMD ["py", "app.py"]
