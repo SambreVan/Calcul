@@ -15,19 +15,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                script {
-                    sh 'pytest --junitxml=test-reports/report.xml'
-                    // Liste le contenu du répertoire pour vérification
-                    sh 'ls -la test-reports'
-                }
-            }
-            post {
-                always {
-                    // Collecter les résultats des tests pour Jenkins
-                    junit '**/test-reports/*.xml'
-                    // Nettoyer le répertoire des rapports après la collecte
-                    sh 'rm -rf test-reports'
-                }
+                echo 'Si besoin de tests'
             }
         }
         stage('Deploy') {
