@@ -4,6 +4,7 @@ pipeline {
     environment {
         // Définir les variables d'environnement nécessaires
         FLASK_APP = 'app.py'
+        DOCKER_HOST = '\\.\\pipe\\docker_engine'
     }
 
     stages {
