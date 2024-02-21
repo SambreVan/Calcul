@@ -2,6 +2,13 @@ from flask import Flask, request, render_template
 
 app = Flask(__name__)
 
+app.config['MYSQL_HOST'] = 'db'
+app.config['MYSQL_USER'] = 'user'
+app.config['MYSQL_PASSWORD'] = 'password'
+app.config['MYSQL_DB'] = 'calculator_db'
+
+mysql = MySQL(app)
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':

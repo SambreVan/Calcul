@@ -1,27 +1,29 @@
 pipeline {
     agent any
 
-    environment {
-        // Définir les variables d'environnement nécessaires
-        FLASK_APP = 'app.py'
-    }
-
     stages {
         stage('Build') {
             steps {
-                // Construire l'image Docker
-                bat 'docker build -t flask-calculator-app .'
+                bat 'docker-compose build'
             }
         }
         stage('Test') {
             steps {
-                echo 'Si besoin de tests'
+                echo 'Exécution des tests...'
+                bat 'docker-compose up -d'
+                bat 'docker-compose run web pytest'
+                bat 'docker-compose down'
             }
         }
         stage('Deploy') {
             steps {
-                bat 'docker run -d -p 5001:5000 flask-calculator-app'
+                bat 'docker-compose up -d'
             }
+        }
+    }
+    post {
+        always {
+            bat 'docker-compose down'
         }
     }
 }
