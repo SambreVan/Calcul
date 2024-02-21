@@ -16,15 +16,17 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    // Activez un environnement virtuel si nécessaire
-                    // sh 'source venv/bin/activate'
                     sh 'pytest --junitxml=test-reports/report.xml'
+                    // Liste le contenu du répertoire pour vérification
+                    sh 'ls -la test-reports'
                 }
             }
             post {
                 always {
                     // Collecter les résultats des tests pour Jenkins
                     junit '**/test-reports/*.xml'
+                    // Nettoyer le répertoire des rapports après la collecte
+                    sh 'rm -rf test-reports'
                 }
             }
         }
