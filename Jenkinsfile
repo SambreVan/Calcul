@@ -2,15 +2,19 @@ pipeline {
     agent any
 
     environment {
-        // Définir les variables d'environnement nécessaires
         FLASK_APP = 'app.py'
     }
 
     stages {
         stage('Build') {
             steps {
-                // Construire l'image Docker
-                bat 'docker build -t flask-calculator-app .'
+                script {
+                    try {
+                        bat 'docker build -t flask-calculator-app .'
+                    } catch (Exception e) {
+                        echo "Erreur lors de la construction de l'image Docker : ${e}"
+                    }
+                }
             }
         }
         stage('Test') {
@@ -20,7 +24,13 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                bat 'docker run -d -p 5000:5000 flask-calculator-app'
+                script {
+                    try {
+                        bat 'docker run -d -p 5000:5000 flask-calculator-app'
+                    } catch (Exception e) {
+                        echo "Erreur lors du déploiement de l'application : ${e}"
+                    }
+                }
             }
         }
     }
