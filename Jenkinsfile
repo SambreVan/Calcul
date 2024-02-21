@@ -10,17 +10,19 @@ pipeline {
         stage('Build') {
             steps {
                 // Construire l'image Docker
-                sh 'docker build -t flask-calculator-app .'
+                bat 'docker build -t flask-calculator-app .'
             }
         }
         stage('Test') {
             steps {
+                
                 echo 'Si besoin de tests'
             }
         }
         stage('Deploy') {
             steps {
-                sh 'docker run -d -p 5000:5000 flask-calculator-app'
+                // Déployer l'application en utilisant Docker
+                bat 'docker run -d -p 5000:5000 flask-calculator-app'
             }
         }
     }
