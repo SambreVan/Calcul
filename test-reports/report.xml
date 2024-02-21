@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="2" time="0.247" timestamp="2024-02-21T20:02:12.772358" hostname="Léana"><testcase classname="test_app" name="test_get_home_page" time="0.011" /><testcase classname="test_app" name="test_post_home_page" time="0.002" /></testsuite></testsuites>
