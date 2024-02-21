@@ -15,14 +15,13 @@ pipeline {
         }
         stage('Test') {
             steps {
-                
                 echo 'Si besoin de tests'
             }
         }
         stage('Deploy') {
             steps {
-                // Déployer l'application en utilisant Docker
-                bat 'docker run -d -p 5000:5000 flask-calculator-app'
+                // Déployer l'application en utilisant Docker avec un utilisateur non privilégié (-u option)
+                bat 'docker run -d -p 5000:5000 --user "$(id -u):$(id -g)" flask-calculator-app'
             }
         }
     }
