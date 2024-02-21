@@ -15,4 +15,4 @@ COPY . .
 EXPOSE 5000
 
 # Définir la commande pour démarrer l'application
-CMD ["py", "app.py"]
+CMD ["flask", "run", "--host=0.0.0.0"]
